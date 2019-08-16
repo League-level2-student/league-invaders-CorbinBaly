@@ -5,19 +5,20 @@ public class GameObject {
 	int y;
 	int width;
 	int height;
+	boolean isAlive = true;
 
 	public GameObject(int x, int y, int width, int height) {
-		x = this.x;
-		y = this.y;
-		width = this.width;
-		height = this.height;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 	}
 
 	void update() {
-	
+
 	}
 
 	void draw(Graphics g) {
-		
+
 	}
 }

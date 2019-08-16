@@ -18,7 +18,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font enterFont;
 	Font instructionFont;
-	Rocketship rocketship = new Rocketship(250,700,50,50);
+	String direction = "none";
+	int rocketx = 100;
+	int rockety = 100;
+	ObjectManager objectmanager = new ObjectManager();
+	Rocketship rocketship = new Rocketship(rocketx, rockety, 50, 50, 5, direction);
 
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
@@ -36,7 +40,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-rocketship.update();
+		objectmanager.draw(g);
 	}
 
 	void drawMenuState(Graphics g) {
@@ -54,7 +58,6 @@ rocketship.update();
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
-		g.setColor(Color.RED);
 		rocketship.draw(g);
 	}
 
@@ -84,7 +87,6 @@ rocketship.update();
 	@Override
 
 	public void paintComponent(Graphics g) {
-		g.fillRect(10, 10, 100, 100);
 		if (currentState == MENU_STATE) {
 			drawMenuState(g);
 		} else if (currentState == GAME_STATE) {
@@ -103,11 +105,28 @@ rocketship.update();
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("KeyPressed");
+		System.out.println(direction);
+		System.out.println(e.getKeyCode());
 		if (e.getKeyCode() == 10 && currentState != 2) {
 			currentState++;
 		} else if (e.getKeyCode() == 10 && currentState == 2) {
 			currentState = 0;
+		}
+		// left
+		if (e.getKeyCode() == 37) {
+			rocketship.direction = "left";
+		}
+		// right
+		else if (e.getKeyCode() == 39) {
+			rocketship.direction = "right";
+		}
+		// back
+		else if (e.getKeyCode() == 38) {
+			rocketship.direction = "back";
+		}
+		// forward
+		else if (e.getKeyCode() == 40) {
+			rocketship.direction = "forward";
 		}
 	}
 
@@ -115,5 +134,6 @@ rocketship.update();
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("KeyReleased");
+		rocketship.direction = "none";
 	}
 }
