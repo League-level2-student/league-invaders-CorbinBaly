@@ -18,17 +18,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font enterFont;
 	Font instructionFont;
-	String direction = "none";
 	int rocketx = 100;
 	int rockety = 100;
-	ObjectManager objectmanager = new ObjectManager();
-	Rocketship rocketship = new Rocketship(rocketx, rockety, 50, 50, 5, direction);
+	
+	Rocketship rocketship;
+	ObjectManager objectmanager;
 
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 		enterFont = new Font("Arial", Font.PLAIN, 30);
 		instructionFont = new Font("Arial", Font.PLAIN, 30);
+		rocketship = new Rocketship(rocketx, rockety, 50, 50, 5);
+		objectmanager = new ObjectManager(rocketship);
 	}
 
 	void updateMenuState() {
@@ -40,7 +42,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-		objectmanager.draw(g);
+
+		rocketship.update();
 	}
 
 	void drawMenuState(Graphics g) {
@@ -58,7 +61,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
-		rocketship.draw(g);
+		objectmanager.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
@@ -87,26 +90,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 
 	public void paintComponent(Graphics g) {
-		if (currentState == MENU_STATE) {
-			drawMenuState(g);
-		} else if (currentState == GAME_STATE) {
-			drawGameState(g);
-		} else if (currentState == END_STATE) {
-			drawEndState(g);
+		
 		}
-	}
+	
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("KeyTyped");
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(direction);
+		
 		System.out.println(e.getKeyCode());
+		System.out.println(rocketship.direction);
 		if (e.getKeyCode() == 10 && currentState != 2) {
 			currentState++;
 		} else if (e.getKeyCode() == 10 && currentState == 2) {
@@ -120,12 +118,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		else if (e.getKeyCode() == 39) {
 			rocketship.direction = "right";
 		}
-		// back
-		else if (e.getKeyCode() == 38) {
-			rocketship.direction = "back";
-		}
 		// forward
 		else if (e.getKeyCode() == 40) {
+			rocketship.direction = "back";
+		}
+		// back
+		else if (e.getKeyCode() == 38) {
 			rocketship.direction = "forward";
 		}
 	}
@@ -133,7 +131,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("KeyReleased");
 		rocketship.direction = "none";
 	}
 }

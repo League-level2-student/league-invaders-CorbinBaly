@@ -1,37 +1,37 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Rocketship extends GameObject {
-	String direction = "none";
-	int speed;
+import javax.swing.Box.Filler;
 
-	public Rocketship(int x, int y, int width, int height, int speed) {
+public class Projectile extends GameObject {
+	int speed = 10;
+	String direction;
+
+	public Projectile(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		this.speed = speed;
+		// TODO Auto-generated constructor stub
 	}
 
-	public void update() {
-		// left
+	void update() {
 		if (direction.equalsIgnoreCase("left")) {
-			x -= (5+speed);
+			x -= (5 + speed);
 		}
 		// right
 		else if (direction.equalsIgnoreCase("right")) {
-			x += (5+speed);
+			x += (5 + speed);
 		}
 		// forward
 		else if (direction.equalsIgnoreCase("forward")) {
-			y -= (5+speed);
+			y -= (5 + speed);
 		}
 		// back
 		else if (direction.equalsIgnoreCase("back")) {
-			y += (5+speed);
+			y += (5 + speed);
 		}
-		
-}
+	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y, width, height);
+		g.setColor(Color.RED);
+		fillrect
 	}
 }
