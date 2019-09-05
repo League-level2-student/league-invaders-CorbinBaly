@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font instructionFont;
 	int rocketx = 100;
 	int rockety = 100;
-	
+
 	Rocketship rocketship;
 	ObjectManager objectmanager;
 
@@ -90,9 +90,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 
 	public void paintComponent(Graphics g) {
-		
+		if (currentState == MENU_STATE) {
+
+			drawMenuState(g);
+
+		} else if (currentState == GAME_STATE) {
+
+			drawGameState(g);
+
+		} else if (currentState == END_STATE) {
+
+			drawEndState(g);
+
 		}
-	
+
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -102,7 +114,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 		System.out.println(e.getKeyCode());
 		System.out.println(rocketship.direction);
 		if (e.getKeyCode() == 10 && currentState != 2) {
@@ -125,6 +137,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// back
 		else if (e.getKeyCode() == 38) {
 			rocketship.direction = "forward";
+		}
+		if(e.getKeyCode()==32) {
+			objectmanager.addProjectile(new Projectile(rocketship.x+20, rocketship.y+15, 10, 10));
 		}
 	}
 

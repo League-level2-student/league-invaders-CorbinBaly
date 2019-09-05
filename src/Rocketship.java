@@ -3,11 +3,9 @@ import java.awt.Graphics;
 
 public class Rocketship extends GameObject {
 	String direction = "none";
-	int speed;
-
+	int speed = 0;
 	public Rocketship(int x, int y, int width, int height, int speed) {
 		super(x, y, width, height);
-		this.speed = speed;
 	}
 
 	public void update() {
