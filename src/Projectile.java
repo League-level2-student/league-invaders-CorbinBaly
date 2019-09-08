@@ -9,12 +9,12 @@ public class Projectile extends GameObject {
 	
 	public Projectile(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		this.y = x;
+		this.y = y;
 		// TODO Auto-generated constructor stub
 	}
 
 	void update() {
-		y=y-speed;
+		y-=speed;
 		if(y<=0) {
 			isAlive=false;
 		}
