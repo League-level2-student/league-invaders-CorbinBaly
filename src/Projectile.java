@@ -6,7 +6,7 @@ import javax.swing.Box.Filler;
 public class Projectile extends GameObject {
 	int speed = 10;
 	String direction;
-	
+
 	public Projectile(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		this.y = y;
@@ -14,10 +14,15 @@ public class Projectile extends GameObject {
 	}
 
 	void update() {
-		y-=speed;
-		if(y<=0) {
-			isAlive=false;
+		y -= speed;
+		if (y <= 0) {
+			isAlive = false;
 		}
+	}
+
+	void kill(Graphics g) {
+
+		
 	}
 
 	void draw(Graphics g) {

@@ -25,7 +25,12 @@ public class Rocketship extends GameObject {
 		else if (direction.equalsIgnoreCase("back")) {
 			y += (5+speed);
 		}
-		
+		if(x<0) {
+			isAlive=false;
+		}
+		else if(y<0) {
+			isAlive=false;
+		}
 }
 
 	void draw(Graphics g) {
