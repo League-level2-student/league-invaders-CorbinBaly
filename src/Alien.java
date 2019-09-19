@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 
 import javax.swing.Box.Filler;
 
@@ -8,7 +9,7 @@ public class Alien extends GameObject {
 	int y;
 	int width;
 	int height;
-
+	
 
 	public Alien(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -23,7 +24,9 @@ public class Alien extends GameObject {
 		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, width, height);
 	}
+
 	void update() {
-		y+=5;
+		y += 7;
+
 	}
 }

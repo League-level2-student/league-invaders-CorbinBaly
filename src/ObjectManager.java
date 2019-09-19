@@ -13,10 +13,13 @@ public ObjectManager(Rocketship rocketship){
 }
 
 
-void purgeObjects() {
+void purgeObjects(Graphics g) {
 	for (int i = 0; i < aliens.size(); i++) {
 		if (aliens.get(i).isAlive==false) {
-			
+		aliens.remove(i);
+		}
+		if(projectiles.get(i).isAlive==false) {
+			projectiles.remove(i);
 		}
 	}
 }
