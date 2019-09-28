@@ -9,7 +9,6 @@ public class Alien extends GameObject {
 	int y;
 	int width;
 	int height;
-	
 
 	public Alien(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -26,7 +25,10 @@ public class Alien extends GameObject {
 	}
 
 	void update() {
+		super.update();
 		y += 7;
-
+if(y<800) {
+	
+}
 	}
 }

@@ -9,6 +9,7 @@ public class Rocketship extends GameObject {
 	}
 
 	public void update() {
+		  super.update();
 		// left
 		if (direction.equalsIgnoreCase("left")) {
 			x -= (5+speed);
