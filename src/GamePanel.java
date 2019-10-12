@@ -31,6 +31,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		instructionFont = new Font("Arial", Font.PLAIN, 30);
 		rocketship = new Rocketship(rocketx, rockety, 50, 50, 5);
 		objectmanager = new ObjectManager(rocketship);
+		if (rocketship.isAlive == false) {
+			System.out.println("ded");
+			currentState = END_STATE;
+		}
 	}
 
 	void updateMenuState() {
@@ -45,7 +49,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		objectmanager.update();
 		objectmanager.manageEnemies();
 		objectmanager.checkCollision();
-		objectmanager.purgeObjects(); 
+		objectmanager.purgeObjects();
 	}
 
 	void drawMenuState(Graphics g) {
@@ -140,8 +144,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		else if (e.getKeyCode() == 38) {
 			rocketship.direction = "forward";
 		}
-		if(e.getKeyCode()==32) {
-			objectmanager.addProjectile(new Projectile(rocketship.x+20, rocketship.y+15, 10, 10));
+		if (e.getKeyCode() == 32) {
+			objectmanager.addProjectile(new Projectile(rocketship.x + 20, rocketship.y + 15, 10, 10));
 		}
 	}
 

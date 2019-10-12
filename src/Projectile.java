@@ -9,7 +9,6 @@ public class Projectile extends GameObject {
 
 	public Projectile(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		this.y = y;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -19,11 +18,6 @@ public class Projectile extends GameObject {
 		if (y <= 0) {
 			isAlive = false;
 		}
-	}
-
-	void kill(Graphics g) {
- 
-		
 	}
 
 	void draw(Graphics g) {
