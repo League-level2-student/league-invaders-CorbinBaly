@@ -5,7 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -23,6 +26,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int projectilesshot;
 	Rocketship rocketship;
 	ObjectManager objectmanager;
+	public static BufferedImage alienImg;
+	public static BufferedImage rocketImg;
+	public static BufferedImage bulletImg;
+	public static BufferedImage spaceImg;
 
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
@@ -31,9 +38,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		instructionFont = new Font("Arial", Font.PLAIN, 30);
 		rocketship = new Rocketship(rocketx, rockety, 50, 50, 5);
 		objectmanager = new ObjectManager(rocketship);
-		if (rocketship.isAlive == false) {
-			System.out.println("ded");
-			currentState = END_STATE;
+		try {
+
+			alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+			rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+			bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+			spaceImg = ImageIO.read(this.getClass().getResourceAsStream("space.png"));
+		} catch (IOException e) {
+
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+
 		}
 	}
 
@@ -50,6 +66,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		objectmanager.manageEnemies();
 		objectmanager.checkCollision();
 		objectmanager.purgeObjects();
+		if (rocketship.isAlive == false) {
+			System.out.println("ded");
+			currentState = END_STATE;
+		}
 	}
 
 	void drawMenuState(Graphics g) {
@@ -67,6 +87,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
+		g.drawImage(spaceImg,0,0, LeagueInvaders.width, LeagueInvaders.height, null);
+
+
 		objectmanager.draw(g);
 	}
 
@@ -125,8 +148,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		System.out.println(rocketship.direction);
 		if (e.getKeyCode() == 10 && currentState != 2) {
 			currentState++;
+			rocketship.isAlive = true;
 		} else if (e.getKeyCode() == 10 && currentState == 2) {
 			currentState = 0;
+			if (currentState == 2) {
+				objectmanager = new ObjectManager(rocketship);
+				rocketship = new Rocketship(rocketx, rockety, 50, 50, 5);
+
+			}
 		}
 		// left
 		if (e.getKeyCode() == 37) {
